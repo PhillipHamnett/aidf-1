@@ -1,11 +1,12 @@
 #include <eosio/eosio.hpp>
-using namespace eosio;
 
-CONTRACT example : public contract {
-   public:
-      using contract::contract;
+class [[eosio::contract("example")]] example : public eosio::contract {
+  public:
+    using eosio::contract::contract;
 
-      ACTION hi( name nm );
-
-      using hi_action = action_wrapper<"hi"_n, &example::hi>;
+    [[eosio::action]] void hi(eosio::name nm);
+    [[eosio::action]] void sendmoney(eosio::name nm);
+    [[eosio::action]] void add(eosio::name nm, int age);
+    [[eosio::action]] void modify(eosio::name, int age);
+    [[eosio::action]] void remove(eosio::name);
 };
